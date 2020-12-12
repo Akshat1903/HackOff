@@ -6,12 +6,15 @@ from django.contrib import messages
 
 class BlockChain(models.Model):
     user =  models.ForeignKey(User, on_delete = models.CASCADE, related_name = "user_blocks")
-    time_stamp = models.DateTimeField(auto_now_add=False)
-    data = models.TextField(blank=True, max_length=255)
+    time_stamp = models.DateTimeField(auto_now_add=True)
+    salt = models.BinaryField()
+    iv = models.BinaryField()
+    file_password = models.CharField(max_length = 256)
+    cipher_text = models.BinaryField()
     previous_hash = models.CharField(max_length = 64,blank = True)
 
     def __str__(self):
-        return self.data
+        return 'Block ' + str(self.id)
 
     def save(self, *args, **kwargs):
         genesis_data = 'genesis data'
@@ -37,8 +40,14 @@ class BlockChain(models.Model):
     @property
     def hash(self):
         return sha256(
-            u'{}{}{}{}'.format(
+            u'{}{}'.format(
                 self.user.username,
-                self.data,
-                self.previous_hash,
-                self.time_stamp).encode('utf-8')).hexdigest()
+                self.previous_hash).encode('utf-8')).hexdigest()
+
+class File(models.Model):
+    user =  models.ForeignKey(User, on_delete = models.CASCADE, related_name = "user_files")
+    file_name = models.CharField(max_length = 256)
+    block = models.ForeignKey(BlockChain,on_delete=models.CASCADE, related_name="file_block")
+
+    def __str__(self):
+        return self.user.username + "'s " + self.file_name
