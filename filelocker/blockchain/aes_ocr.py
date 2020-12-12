@@ -11,7 +11,7 @@ Original file is located at
 '''!pip install pycryptodome
 !pip install argon2_cffi
 !pip install python-secrets
-!apt-get install poppler-utils 
+!apt-get install poppler-utils
 # %pip install pdf2image
 !pip install opencv-python
 !sudo apt install tesseract-ocr
@@ -40,7 +40,7 @@ def encrypt(key, plaintext):
     iv = Random.new().read(AES.block_size)
 
     # Convert the IV to a Python integer.
-    iv_int = int(binascii.hexlify(iv), 16) 
+    iv_int = int(binascii.hexlify(iv), 16)
 
     # Create a new Counter object with IV = iv_int.
     ctr = Counter.new(AES.block_size * 8, initial_value=iv_int)
@@ -59,8 +59,8 @@ def decrypt(key, iv, ciphertext):
 
     # Initialize counter for decryption. iv should be the same as the output of
     # encrypt().
-    #iv_int = int(iv.encode('hex'), 16) 
-    iv_int = int(binascii.hexlify(iv), 16) 
+    #iv_int = int(iv.encode('hex'), 16)
+    iv_int = int(binascii.hexlify(iv), 16)
     ctr = Counter.new(AES.block_size * 8, initial_value=iv_int)
 
     # Create AES-CTR cipher.
@@ -77,7 +77,7 @@ def salt_generator():
     return secrets.token_bytes(32)
 
 def validation(password):
-    #block to generate hash to validate whether the password is correct or not 
+    #block to generate hash to validate whether the password is correct or not
 
     argon2Hasher = argon2.PasswordHasher(time_cost=16, memory_cost=2**15, parallelism=2, hash_len=32, salt_len=16)
     hash = argon2Hasher.hash(password)
@@ -87,10 +87,10 @@ def validation(password):
 def check_password(hash, password):
     #to check whether entered subject(password) by the user is correct or not
     argon2Hasher = argon2.PasswordHasher(time_cost=16, memory_cost=2**15, parallelism=2, hash_len=32, salt_len=16)
-       
+
     try:
         return argon2Hasher.verify(hash, password)
-         
+
     except:
         return False
 
@@ -104,13 +104,13 @@ def key_generator_argon2(password, salt):
 
     return hash
 
-def encryption(pdf, password):
+def ocr_encryption(pdf, password):
 
     text =  _main_(pdf)
     text_to_encrypt = text[0]
 
     #use if text not in byte format
-    #text_to_encrypt = text_to_encrypt.encode('utf-8')
+    text_to_encrypt = text_to_encrypt.encode('utf-8')
 
     salt = salt_generator()
     key = key_generator_argon2(password, salt)
@@ -151,7 +151,7 @@ def text_generation(x_data):
   return text
 
 def pdf_to_images(pdfs):
-      
+
       #pages = convert_from_path(pdfs, 500)
       pages = convert_from_bytes(pdfs.read(), 500)
       x_data = []

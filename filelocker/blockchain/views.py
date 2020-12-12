@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login,logout,authenticate
 from django.http import HttpResponseRedirect,HttpResponse
 from .aes import encryption,decryption,check_password
+from .aes_ocr import ocr_encryption
 from datetime import datetime
 from .models import User,BlockChain,File
 
@@ -70,13 +71,22 @@ def user_file_upload(request):
         file_password = request.POST.get('password')
         if 'user_file' in request.FILES:
             file = request.FILES['user_file']
-            (salt, iv, hashed_password, ciphertext) = encryption(file,file_password)
-            print(hashed_password)
-            block = BlockChain(user=request.user,salt=salt,iv=iv,file_password=hashed_password,cipher_text=ciphertext)
-            block.save()
-            file_model = File(user=request.user, file_name=file.name, block=block)
-            file_model.save()
-            return redirect('blockchain:home')
+            if file.name.endswith('.txt'):
+                (salt, iv, hashed_password, ciphertext) = encryption(file,file_password)
+                block = BlockChain(user=request.user,salt=salt,iv=iv,file_password=hashed_password,cipher_text=ciphertext)
+                block.save()
+                file_model = File(user=request.user, file_name=file.name, block=block)
+                file_model.save()
+                return redirect('blockchain:home')
+            elif file.name.endswith('.pdf'):
+                (salt, iv, hashed_password, ciphertext) = ocr_encryption(file,file_password)
+                block = BlockChain(user=request.user,salt=salt,iv=iv,file_password=hashed_password,cipher_text=ciphertext)
+                block.save()
+                file_model = File(user=request.user, file_name=file.name, block=block)
+                file_model.save()
+                return redirect('blockchain:home')
+            else:
+                return redirect('blockchain:user_file_upload')
         return redirect('blockchain:user_file_upload')
     return render(request,'blockchain/file_upload.html',{})
 
