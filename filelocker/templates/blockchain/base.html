@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Insidethecoconut</title>
+  </head>
+  <body>
+
+    <nav>
+      <ul>
+        <li><a href="{% url 'blockchain:home' %}">Home Page</a></li>
+        {% if user.is_authenticated %}
+        <li><a href="{% url 'blockchain:user_file_upload' %}">Upload File</a></li>
+        <li><a href="{% url 'blockchain:user_files' %}">View Uploaded files</a></li>
+        <li><a href="{% url 'blockchain:logout' %}">Logout</a></li>
+        <li> <a href="#">{{ user.username }}</a></li>
+        {% else %}
+        <li><a href="{% url 'blockchain:signup' %}">Sign Up</a></li>
+        <li><a href="{% url 'blockchain:login' %}">Login</a></li>
+        {% endif %}
+      </ul>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+
+  </body>
+</html>

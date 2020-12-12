@@ -1,4 +1,26 @@
-<!DOCTYPE html>
+{% extends 'blockchain/base.html' %}
+{% block content %}
+
+<form action="{% url 'blockchain:signup' %}" method="post">
+    {% csrf_token %}
+    <label for="username">Username:</label>
+    <input type="text" name="username" id="username" />
+    <br>
+    <label for="password">Password:</label>
+    <input type="password" name="password" id="password" />
+    <br>
+    <label for="con_password">Confirm password:</label>
+    <input type="password" name="password_confirm" id="con_password" />
+    <br>
+    <label for="email">Email:</label>
+    <input type="email" name="email" id="email" />
+    <br>
+    <input type="submit" name="" value="submit" id="submit">
+</form>
+
+{% endblock %}
+
+<!-- <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
@@ -13,6 +35,6 @@
             <input type="email" name="email" />
             <br>
             <input type="submit" name="" value="submit" id="submit">
-        </form>    
+        </form>
     </body>
-</html>
+</html> -->

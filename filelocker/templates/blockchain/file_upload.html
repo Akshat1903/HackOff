@@ -1,18 +1,17 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-    <head>
-        <meta charset="utf-8">
-        <title></title>
-    </head>
-    <body>
-        <form action="{% url 'blockchain:user_file_upload' %}" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <label for="file">Upload File (Max-pages: 10):</label>
-            <input type="file" id="file" name="user_file" />
-            <label for="password">Enter a encryption password:</label>
-            <input type="password" id="password" name="password" />
-            <br>
-            <input type="submit" name="" value="submit" id="submit">
-        </form>
-    </body>
-</html>
+{% extends 'blockchain/base.html' %}
+{% block content %}
+
+<form action="{% url 'blockchain:user_file_upload' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <label for="file">Upload File (Max-pages: 10):</label>
+    <input type="file" id="file" name="user_file" />
+    <br>
+    <label for="password">Enter a encryption password:</label>
+    <input type="password" id="password" name="password" />
+    <br>
+    <input type="submit" name="" value="submit" id="submit">
+</form>
+
+
+{% endblock %}

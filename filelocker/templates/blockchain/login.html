@@ -1,15 +1,15 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-    <form action="{% url 'blockchain:login' %}" method="post">
-        {% csrf_token %}
-        <input type="text" name="username" />
-        <input type="password" name="password" />
-        <input type="submit" name="" value="submit" id="submit">
-      </form>
-  </body>
-</html>
+{% extends 'blockchain/base.html' %}
+{% block content %}
+
+<form action="{% url 'blockchain:login' %}" method="post">
+    {% csrf_token %}
+    <label for="username">Username</label>
+    <input type="text" name="username" id="username" />
+    <br>
+    <label for="password">Password:</label>
+    <input type="password" name="password" id="password" />
+    <br>
+    <input type="submit" name="" value="submit" id="submit">
+</form>
+
+{% endblock %}

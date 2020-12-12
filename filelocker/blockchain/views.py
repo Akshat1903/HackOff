@@ -3,9 +3,9 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login,logout,authenticate
 from django.http import HttpResponseRedirect,HttpResponse
-from .aes import encryption,decryption
+from .aes import encryption,decryption,check_password
 from datetime import datetime
-from .models import BlockChain,File
+from .models import User,BlockChain,File
 
 # Create your views here.
 
@@ -72,14 +72,30 @@ def user_file_upload(request):
             file = request.FILES['user_file']
             (salt, iv, hashed_password, ciphertext) = encryption(file,file_password)
             print(hashed_password)
-            block = BlockChain(user=request.user,
-                                salt=salt,
-                                iv=iv,
-                                file_password=hashed_password,
-                                cipher_text=ciphertext)
+            block = BlockChain(user=request.user,salt=salt,iv=iv,file_password=hashed_password,cipher_text=ciphertext)
             block.save()
             file_model = File(user=request.user, file_name=file.name, block=block)
             file_model.save()
             return redirect('blockchain:home')
         return redirect('blockchain:user_file_upload')
     return render(request,'blockchain/file_upload.html',{})
+
+def user_files(request):
+    user_files = File.objects.filter(user=request.user)
+    return render(request,'blockchain/user_files.html',{'user_files':user_files})
+
+def file_details(request,pk = None):
+    crrt_pass = False
+    count = 0
+    file = File.objects.get(pk=pk)
+    block = file.block
+    text = ''
+    if request.method == "POST":
+        file_enter_password = request.POST.get('password')
+        if(check_password(block.file_password,file_enter_password)):
+            text = decryption(block.salt, block.iv, block.cipher_text, file_enter_password)
+            text = text.decode('utf-8')
+            crrt_pass = True
+        else:
+            count = 1
+    return render(request,'blockchain/input_password.html',{'text':text,'crrt_pass':crrt_pass,'pk':pk,'count':count})

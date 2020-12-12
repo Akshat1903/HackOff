@@ -1,0 +1,15 @@
+{% extends 'blockchain/base.html' %}
+{% block content %}
+
+{% for file in user_files %}
+
+<table>
+  <tr>
+    <td>{{ file.file_name }}</td>
+    <td><a href="{% url 'blockchain:file_details' pk=file.pk %}">view</a></td>
+  </tr>
+</table>
+
+{% endfor %}
+
+{% endblock %}
