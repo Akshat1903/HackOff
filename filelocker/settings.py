@@ -25,7 +25,7 @@ STATIC_DIR = os.path.join(BASE_DIR,'static')
 SECRET_KEY = 'w36y1&sw4%o=3bilq1uq2f)a#vxc0-r%&(raz1i+ze=v-8a941'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['insidethecoconut.herokuapp.com']
 
