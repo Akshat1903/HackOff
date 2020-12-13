@@ -1,5 +1,8 @@
 # HackOff
-Repository for HackOff submission
+
+# The Coconut:
+As coconuts are tough to open so are your files in our portal.
+
 # Our Vision
 Cyber Attacks are increasing on a daily basis and so are the various methods employed by the hackers, compromising the privacy of people across the internet. And with newer data security regulations arising from the governments across the globe, this presents a need for a secure environment where data can be stored away from prying eyes, anonymously. 
 
