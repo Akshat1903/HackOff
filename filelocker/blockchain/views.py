@@ -21,7 +21,6 @@ def signup(request):
         password = request.POST.get('password')
         password_conformation = request.POST.get('password_confirm')
         email = request.POST.get('email')
-
         if(password != password_conformation):
             # messages.error(
             #     request, "Confirm Passowrd does not match original password")
@@ -72,6 +71,8 @@ def user_file_upload(request):
         file_password = request.POST.get('password')
         if 'user_file' in request.FILES:
             file = request.FILES['user_file']
+            file2 = request.FILES['user_file']
+            print(file.name)
             if file.name.endswith('.txt'):
                 (salt, iv, hashed_password, ciphertext) = encryption(file,file_password)
                 block = BlockChain(user=request.user,salt=salt,iv=iv,file_password=hashed_password,cipher_text=ciphertext)
@@ -80,15 +81,12 @@ def user_file_upload(request):
                 file_model.save()
                 return redirect('blockchain:home')
             elif file.name.endswith('.pdf'):
-                if (check_page_count(file)):
-                    (salt, iv, hashed_password, ciphertext) = ocr_encryption(file,file_password)
-                    block = BlockChain(user=request.user,salt=salt,iv=iv,file_password=hashed_password,cipher_text=ciphertext)
-                    block.save()
-                    file_model = File(user=request.user, file_name=file.name, block=block)
-                    file_model.save()
-                    return redirect('blockchain:home')
-                else:
-                    return redirect('blockchain:user_file_upload')
+                (salt, iv, hashed_password, ciphertext) = ocr_encryption(file,file_password)
+                block = BlockChain(user=request.user,salt=salt,iv=iv,file_password=hashed_password,cipher_text=ciphertext)
+                block.save()
+                file_model = File(user=request.user, file_name=file.name, block=block)
+                file_model.save()
+                return redirect('blockchain:home')
             else:
                 return redirect('blockchain:user_file_upload')
         return redirect('blockchain:user_file_upload')

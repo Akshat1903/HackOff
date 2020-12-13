@@ -1,15 +1,37 @@
 {% extends 'blockchain/base.html' %}
+{% load static %}
+{% block cssblock %}
+<link rel="stylesheet" href="{% static 'css/user_files.css' %}">
+{% endblock %}
 {% block content %}
 
-{% for file in user_files %}
-
-<table>
-  <tr>
-    <td>{{ file.file_name }}</td>
-    <td><a href="{% url 'blockchain:file_details' pk=file.pk %}">view</a></td>
-  </tr>
-</table>
-
-{% endfor %}
-
+<div class="my-files-info">
+    <div class="container">
+        <div class="my-files">
+            {% if user_files.count == 0 %}
+            <h1>No Files Uploaded yet!!!</h1>
+            {% else %}
+            <h1>Your Uploaded Files:</h1>
+            <br>
+            <div class="row">
+                {% for file in user_files %}
+                <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+                    <div class="my-file-name">
+                        <div class="filelocker-image">
+                            <img src="{% static 'images/filelocker.svg' %}">
+                        </div>
+                        <h4>{{ file.file_name }}</h4>
+                        <a href="{% url 'blockchain:file_details' pk=file.pk %}">
+                            <div class="view-file-button">
+                                View File
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

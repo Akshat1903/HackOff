@@ -167,9 +167,6 @@ nav ul li a:hover {
     color: #fff;
     font-size: 50px;
     top: 33%;
-    /* text-transform: uppercase; */
-    /* letter-spacing: 8px;
-  text-shadow: 0 0 10px #000; */
     line-height: 70px;
     max-width: 70vw;
     margin: auto;
@@ -526,4 +523,74 @@ nav ul li a:hover {
 
 .list-unstyled li a:hover {
     text-decoration: none;
+}
+
+@media only screen and (max-width: 1200px) {
+    body {
+        overflow-x: hidden;
+    }
+    nav {
+        background: black;
+    }
+    nav ul {
+        position: absolute;
+        right: 0px;
+        height: 92vh;
+        top: 8vh;
+        background: black;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 60%;
+        transform: translateX(110%);
+        transition: transform 0.5s ease-in;
+    }
+    nav ul li {
+        opacity: 0;
+        margin: 20px;
+    }
+    nav ul li a:hover {
+        color: black;
+    }
+    .burger {
+        display: block;
+    }
+    .teams {
+        margin: 30px 8%;
+    }
+    .car:hover .cover{
+        font-size: 9px;
+        top: 3vh;
+    }
+}
+
+@media screen and (min-height: 1000px ){
+	nav ul li a p {
+        font-size: 30px;
+    }
+    nav ul li {
+        opacity: 0;
+        margin: 40px;
+    }
+}
+
+@media screen and (max-height: 420px){
+	nav{
+        height: 12vh;
+    }
+    label.logo {
+        font-size: 20px;
+        margin-bottom: 0;
+        margin-top: 0;
+        height: 100%;
+        padding-top: 2vh;
+    }
+		nav ul{
+        top: 12vh;
+        height: 88vh;
+    }
+		nav ul li {
+			opacity: 0;
+			margin: 14px;
+	}
 }

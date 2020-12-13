@@ -73,35 +73,35 @@ textarea:focus, input:focus {
 }
 
 input::-webkit-input-placeholder {
-    color: #666666;
+    color: white;
 }
 
 input:-moz-placeholder {
-    color: #666666;
+    color: white;
 }
 
 input::-moz-placeholder {
-    color: #666666;
+    color: white;
 }
 
 input:-ms-input-placeholder {
-    color: #666666;
+    color: white;
 }
 
 textarea::-webkit-input-placeholder {
-    color: #666666;
+    color: white;
 }
 
 textarea:-moz-placeholder {
-    color: #666666;
+    color: white;
 }
 
 textarea::-moz-placeholder {
-    color: #666666;
+    color: white;
 }
 
 textarea:-ms-input-placeholder {
-    color: #666666;
+    color: white;
 }
 
 /*---------------------------------------------*/
@@ -124,7 +124,7 @@ iframe {
 .txt1 {
     font-size: 15px;
     line-height: 1.4;
-    color: #999999;
+    color: white;
 }
 
 .txt2 {
@@ -156,12 +156,17 @@ iframe {
     justify-content: center;
     align-items: center;
     padding: 15px;
-    background: black;
+    background-image: url('background.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 .wrap-login100 {
     width: 500px;
-    background: #fff;
+    /* background: #fff; */
+    background: transparent
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
@@ -180,7 +185,7 @@ iframe {
 .login100-form-title {
     display: block;
     font-size: 30px;
-    color: #555555;
+    color: white;
     line-height: 1.2;
     text-align: center;
 }
@@ -190,8 +195,9 @@ iframe {
 .wrap-input100 {
     width: 100%;
     position: relative;
-    background-color: #fff;
-    border: 1px solid #e6e6e6;
+    /* background-color: #fff; */
+    background: transparent;
+    /* border: 1px solid #e6e6e6; */
 }
 
 .wrap-input100.rs1 {
@@ -203,7 +209,7 @@ iframe {
     width: 100%;
     background: transparent;
     font-size: 15px;
-    color: #666666;
+    color: white;
     line-height: 1.2;
 }
 
@@ -211,6 +217,7 @@ iframe {
 input.input100 {
     height: 68px;
     padding: 0 25px 0 25px;
+    color: white;
 }
 
 /*------------------------------------------------------------------

@@ -1,17 +1,42 @@
 {% extends 'blockchain/base.html' %}
+{% load static %}
+{% block cssblock %}
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+{% endblock %}
+
 {% block content %}
 
-<form action="{% url 'blockchain:user_file_upload' %}" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
+            <form class="login100-form validate-form" action="{% url 'blockchain:user_file_upload' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <br>
+                <span class="login100-form-title p-b-33">
+                    <h1>Upload Your File</h1>
+                </span>
+                <br>
+                <div class="wrap-input100 validate-input">
+                    <input class="input100" type="file" name="user_file" placeholder="Upload Your File">
+                    <span class="focus-input100-1"></span>
+                    <span class="focus-input100-2"></span>
+                </div>
 
-    <label for="file">Upload File (Max-pages: 10):</label>
-    <input type="file" id="file" name="user_file" />
-    <br>
-    <label for="password">Enter a encryption password:</label>
-    <input type="password" id="password" name="password" />
-    <br>
-    <input type="submit" name="" value="submit" id="submit">
-</form>
+                <div class="wrap-input100 rs1 validate-input">
+                    <input class="input100" type="password" name="password" placeholder="Enter File Encryption Password">
+                    <span class="focus-input100-1"></span>
+                    <span class="focus-input100-2"></span>
+                </div>
 
+                <br>
+                <div class="container-login100-form-btn m-t-20">
+                    <button class="login100-form-btn">
+                        Upload File
+                    </button>
+                </div>
 
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}

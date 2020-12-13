@@ -8,14 +8,14 @@ Original file is located at
 """
 
 # Commented out IPython magic to ensure Python compatibility.
-'''!apt-get install poppler-utils 
+'''!apt-get install poppler-utils
 # %pip install pdf2image'''
 
 from pdf2image import convert_from_path,convert_from_bytes
 
 def check_page_count(pdf):
     #pages = convert_from_path(pdfs, 500)
-    pages = convert_from_bytes(pdfs.read(), 500)
+    pages = convert_from_bytes(pdf.read(), 500)
     l = len(pages)
 
     if l<6:
