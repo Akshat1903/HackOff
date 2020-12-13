@@ -25,10 +25,15 @@ We implemented a portal for the people to facilitate them in storage of any kind
 
 # Technology Stack used :
 Encryption - AES
+
 Hashing - ARGON2
+
 Blockchain 
+
 Optical Character Recognition - Python
+
 Front End - HTML, CSS, Javascript, Bootstrap 
+
 Backend - Django 
  
 # What challenges did we face?
