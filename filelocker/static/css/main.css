@@ -2,62 +2,6 @@ body {
     font-family: 'Hammersmith One', sans-serif !important;
 }
 
-/*//////////////////////////////////////////////////////////////////
-[ FONT ]*/
-/* @font-face {
-  font-family: OpenSans-Regular;
-  src: url('../fonts/OpenSans/OpenSans-Regular.ttf');
-} */
-/*//////////////////////////////////////////////////////////////////
-[ RESTYLE TAG ]*/
-/* * {
-	margin: 0px;
-	padding: 0px;
-	box-sizing: border-box;
-}
-
-body, html {
-	height: 100%;
-	font-family: OpenSans-Regular, sans-serif;
-} */
-/*---------------------------------------------*/
-/* a {
-	font-family: OpenSans-Regular;
-	font-size: 14px;
-	line-height: 1.7;
-	color: #666666;
-	margin: 0px;
-	transition: all 0.4s;
-	-webkit-transition: all 0.4s;
-  -o-transition: all 0.4s;
-  -moz-transition: all 0.4s;
-}
-
-a:focus {
-	outline: none !important;
-}
-
-a:hover {
-	text-decoration: none;
-} */
-/*---------------------------------------------*/
-/* h1,h2,h3,h4,h5,h6 {
-	margin: 0px;
-}
-
-p {
-	font-family: OpenSans-Regular;
-	font-size: 14px;
-	line-height: 1.7;
-	color: #666666;
-	margin: 0px;
-}
-
-ul, li {
-	margin: 0px;
-	list-style-type: none;
-} */
-/*---------------------------------------------*/
 input {
     outline: none;
     border: none;
@@ -410,4 +354,12 @@ input.input100 {
         visibility: visible;
         opacity: 1;
     }
+}
+
+.file-display{
+  margin: 20vh 0;
+  padding: 30px;
+  background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+  color: black;
+  border-radius: .8rem;
 }

@@ -20,7 +20,7 @@
                         <div class="filelocker-image">
                             <img src="{% static 'images/filelocker.svg' %}">
                         </div>
-                        <h4>{{ file.file_name }}</h4>
+                        <p>{{ file.file_name }}</p>
                         <a href="{% url 'blockchain:file_details' pk=file.pk %}">
                             <div class="view-file-button">
                                 View File

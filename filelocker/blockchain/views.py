@@ -8,6 +8,7 @@ from .aes_ocr import ocr_encryption
 from datetime import datetime
 from .models import User,BlockChain,File
 from .page_count import check_page_count
+from django.contrib import messages
 
 # Create your views here.
 
@@ -22,13 +23,11 @@ def signup(request):
         password_conformation = request.POST.get('password_confirm')
         email = request.POST.get('email')
         if(password != password_conformation):
-            # messages.error(
-            #     request, "Confirm Passowrd does not match original password")
+            messages.error(request, "Confirm Passowrd does not match original password")
             return redirect('blockchain:signup')
         else:
             if(User.objects.filter(username=username).exists()):
-                # messages.error(
-                #     request, "Username already exists, try to signin or choose different username")
+                messages.error(request, "Username already exists, try to signin or choose different username")
                 return redirect('blockchain:signup')
             else:
                 try:
@@ -36,7 +35,7 @@ def signup(request):
                         username=username, password=password, email=email)
                     user.save()
                 except:
-                    # messages.error(request, "Email already exists")
+                    messages.error(request, "Email already exists")
                     return redirect('blockchain:signup')
                 user = authenticate(username=username, password=password)
                 login(request, user)
@@ -55,6 +54,7 @@ def user_login(request):
             else:
                 return HttpResponse("Account not active")
         else:
+            messages.error(request, "Username or Password Incorrect")
             return redirect('blockchain:login')
     else:
         return render(request,'blockchain/login.html',{})
@@ -88,14 +88,17 @@ def user_file_upload(request):
                 file_model.save()
                 return redirect('blockchain:home')
             else:
+                messages.error(request, "Please Upload a valid file type txt/pdf")
                 return redirect('blockchain:user_file_upload')
         return redirect('blockchain:user_file_upload')
     return render(request,'blockchain/file_upload.html',{})
 
+@login_required
 def user_files(request):
     user_files = File.objects.filter(user=request.user)
     return render(request,'blockchain/user_files.html',{'user_files':user_files})
 
+@login_required
 def file_details(request,pk = None):
     crrt_pass = False
     count = 0
@@ -109,5 +112,6 @@ def file_details(request,pk = None):
             text = text.decode('utf-8')
             crrt_pass = True
         else:
+            messages.error(request, "Incorrect password please try again")
             count = 1
     return render(request,'blockchain/input_password.html',{'text':text,'crrt_pass':crrt_pass,'pk':pk,'count':count})
