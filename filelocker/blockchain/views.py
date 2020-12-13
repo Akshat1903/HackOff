@@ -13,7 +13,7 @@ from .page_count import check_page_count
 
 
 def index(request):
-    return render(request, 'blockchain/home.html', {})
+    return render(request, 'blockchain/index.html', {})
 
 def signup(request):
     if request.method == "POST":
@@ -88,7 +88,7 @@ def user_file_upload(request):
                     file_model.save()
                     return redirect('blockchain:home')
                 else:
-                    return redirect('blockchain:user_file_upload')    
+                    return redirect('blockchain:user_file_upload')
             else:
                 return redirect('blockchain:user_file_upload')
         return redirect('blockchain:user_file_upload')

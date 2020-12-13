@@ -1,31 +1,60 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
 <head>
     <meta charset="utf-8">
-    <title>Insidethecoconut</title>
+    <title>Inside the coconut</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap" rel="stylesheet">
+    {% block cssblock %}
+    {% endblock %}
+
 </head>
 
 <body>
-
     <nav>
-        <ul>
-            <li><a href="{% url 'blockchain:home' %}">Home Page</a></li>
-            {% if user.is_authenticated %}
-            <li><a href="{% url 'blockchain:user_file_upload' %}">Upload File</a></li>
-            <li><a href="{% url 'blockchain:user_files' %}">View Uploaded files</a></li>
-            <li><a href="{% url 'blockchain:logout' %}">Logout</a></li>
-            <li> <a href="#">{{ user.username }}</a></li>
-            {% else %}
-            <li><a href="{% url 'blockchain:signup' %}">Sign Up</a></li>
-            <li><a href="{% url 'blockchain:login' %}">Login</a></li>
-            {% endif %}
+        <label class="logo"><a href="{% url 'blockchain:home' %}"><p>INSIDE THE COCONUT</p></a></label>
+        <ul class="nav-links">
+        {% if user.is_authenticated %}
+        <li id="toau"><a href="{% url 'blockchain:user_file_upload' %}">
+                <p>Upload File</p>
+            </a></li>
+        <li id="toau"><a href="{% url 'blockchain:user_files' %}">
+                <p>View Uploaded files</p>
+            </a></li>
+        <li id="toau"><a href="{% url 'blockchain:logout' %}">
+                <p>Logout</p>
+             </a></li>
+        <li id="toau"><a href="">
+                <p>{{ user.username }}</p>
+            </a></li>
+        {% else %}
+        <li id="toau"><a href="{% url 'blockchain:signup' %}">
+                <p>Sign Up</p>
+            </a></li>
+        <li id="toau"><a href="{% url 'blockchain:login' %}">
+                  <p>Login</p>
+            </a></li>
+        {% endif %}
         </ul>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
     </nav>
 
     {% block content %}
     {% endblock %}
 
+    <script src="{% static 'js/index.js' %}"></script>
 </body>
 
 </html>
