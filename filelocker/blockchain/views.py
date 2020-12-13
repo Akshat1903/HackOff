@@ -7,6 +7,7 @@ from .aes import encryption,decryption,check_password
 from .aes_ocr import ocr_encryption
 from datetime import datetime
 from .models import User,BlockChain,File
+from .page_count import check_page_count
 
 # Create your views here.
 
@@ -79,12 +80,15 @@ def user_file_upload(request):
                 file_model.save()
                 return redirect('blockchain:home')
             elif file.name.endswith('.pdf'):
-                (salt, iv, hashed_password, ciphertext) = ocr_encryption(file,file_password)
-                block = BlockChain(user=request.user,salt=salt,iv=iv,file_password=hashed_password,cipher_text=ciphertext)
-                block.save()
-                file_model = File(user=request.user, file_name=file.name, block=block)
-                file_model.save()
-                return redirect('blockchain:home')
+                if (check_page_count(file)):
+                    (salt, iv, hashed_password, ciphertext) = ocr_encryption(file,file_password)
+                    block = BlockChain(user=request.user,salt=salt,iv=iv,file_password=hashed_password,cipher_text=ciphertext)
+                    block.save()
+                    file_model = File(user=request.user, file_name=file.name, block=block)
+                    file_model.save()
+                    return redirect('blockchain:home')
+                else:
+                    return redirect('blockchain:user_file_upload')    
             else:
                 return redirect('blockchain:user_file_upload')
         return redirect('blockchain:user_file_upload')
